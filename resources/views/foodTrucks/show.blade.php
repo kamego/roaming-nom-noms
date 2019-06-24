@@ -4,7 +4,8 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-12">
-        	{{ $truck->name }}
+        	<h2>{{ $truck->name }}</h2>
+        	
         </div>
     </div>
 </div>

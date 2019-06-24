@@ -21,5 +21,5 @@ Route::get('home', 'HomeController@index')->name('home');
 
 Route::get('admin/routes', 'HomeController@admin')->middleware('admin');
 
-Route::resource('food-trucks','TruckController');
+Route::resource('food-trucks','FoodTruckController');
 

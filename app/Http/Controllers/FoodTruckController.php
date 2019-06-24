@@ -14,7 +14,8 @@ class FoodTruckController extends Controller
      */
     public function index()
     {
-        //
+        $trucks = FoodTruck::all();
+        return view('foodTrucks.index',compact('trucks'));
     }
 
     /**
@@ -46,7 +47,9 @@ class FoodTruckController extends Controller
      */
     public function show(FoodTruck $foodTruck)
     {
-        //
+        // dd($foodTruck);
+        $truck = $foodTruck;
+        return view('foodTrucks.show',compact('truck'));
     }
 
     /**
