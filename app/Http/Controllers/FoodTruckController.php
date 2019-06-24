@@ -45,10 +45,9 @@ class FoodTruckController extends Controller
      * @param  \App\FoodTruck  $foodTruck
      * @return \Illuminate\Http\Response
      */
-    public function show(FoodTruck $foodTruck)
+    public function show($slug)
     {
-        // dd($foodTruck);
-        $truck = $foodTruck;
+        $truck = FoodTruck::where('slug',$slug)->first();
         return view('foodTrucks.show',compact('truck'));
     }
 

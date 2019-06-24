@@ -7,5 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 class FoodTruck extends Model
 {
     protected $guarded = [];
-    protected $primaryKey = 'slug';
+    // protected $primaryKey = 'slug';
 }
