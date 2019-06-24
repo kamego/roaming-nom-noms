@@ -2,10 +2,10 @@
  
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-12">
+    <div class="row">
+        <div class="col-4">
         	@foreach($trucks as $truck)
-        	{{ $truck->name }}<br>
+        	<h3><a href="food-trucks/{{ $truck->slug }}">{{ $truck->name }}</a></h3>
         	@endforeach
         </div>
     </div>
