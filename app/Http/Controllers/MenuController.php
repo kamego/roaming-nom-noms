@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\FoodTruck;
+use App\Menu;
 use Illuminate\Http\Request;
 
-class FoodTruckController extends Controller
+class MenuController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +14,7 @@ class FoodTruckController extends Controller
      */
     public function index()
     {
-        $trucks = FoodTruck::all();
-        return view('foodTrucks.index',compact('trucks'));
+        //
     }
 
     /**
@@ -42,35 +41,33 @@ class FoodTruckController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\FoodTruck  $foodTruck
+     * @param  \App\Menu  $menu
      * @return \Illuminate\Http\Response
      */
-    public function show($slug)
+    public function show(Menu $menu)
     {
-        $truck = FoodTruck::where('slug',$slug)->first();
-        return view('foodTrucks.show',compact('truck'));
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\FoodTruck  $foodTruck
+     * @param  \App\Menu  $menu
      * @return \Illuminate\Http\Response
      */
-    public function edit(FoodTruck $foodTruck)
+    public function edit(Menu $menu)
     {
-        $truck = $foodTruck;
-        return view('foodTrucks.edit',compact('truck'));
+        //
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\FoodTruck  $foodTruck
+     * @param  \App\Menu  $menu
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, FoodTruck $foodTruck)
+    public function update(Request $request, Menu $menu)
     {
         //
     }
@@ -78,10 +75,10 @@ class FoodTruckController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\FoodTruck  $foodTruck
+     * @param  \App\Menu  $menu
      * @return \Illuminate\Http\Response
      */
-    public function destroy(FoodTruck $foodTruck)
+    public function destroy(Menu $menu)
     {
         //
     }

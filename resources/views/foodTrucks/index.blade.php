@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-4">
         	@foreach($trucks as $truck)
-        	<h3><a href="food-trucks/{{ $truck->slug }}">{{ $truck->name }}</a></h3><br>
+        	<h3><a href="/food-trucks/{{ $truck->slug }}">{{ $truck->name }}</a></h3><br>
         	{{ $truck }}
         	@endforeach
         </div>
