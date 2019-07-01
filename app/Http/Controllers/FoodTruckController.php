@@ -23,7 +23,7 @@ class FoodTruckController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($slug)
     {
         //
     }
@@ -47,8 +47,8 @@ class FoodTruckController extends Controller
      */
     public function show($slug)
     {
-        $truck = FoodTruck::where('slug',$slug)->first();
-        return view('foodTrucks.show',compact('truck'));
+        $foodTruck = FoodTruck::where('slug',$slug)->with(['menus'])->first();
+        return view('foodTrucks.show',compact('foodTruck'));
     }
 
     /**
@@ -57,10 +57,10 @@ class FoodTruckController extends Controller
      * @param  \App\FoodTruck  $foodTruck
      * @return \Illuminate\Http\Response
      */
-    public function edit(FoodTruck $foodTruck)
+    public function edit($slug)
     {
-        $truck = $foodTruck;
-        return view('foodTrucks.edit',compact('truck'));
+        $foodTruck = FoodTruck::where('slug',$slug)->first();
+        return view('foodTrucks.edit',compact('foodTruck'));
     }
 
     /**
@@ -70,9 +70,13 @@ class FoodTruckController extends Controller
      * @param  \App\FoodTruck  $foodTruck
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, FoodTruck $foodTruck)
+    public function update(Request $request, FoodTruck $foodTruck, $slug)
     {
-        //
+        $foodTruck = FoodTruck::where('slug',$slug)->first();
+        $foodTruck->update(
+            $request->only(['name','email'])
+        );
+        return redirect()->back();
     }
 
     /**

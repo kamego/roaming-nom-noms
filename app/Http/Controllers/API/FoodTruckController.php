@@ -1,23 +1,24 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
 use App\FoodTruck;
-use App\Menu;
+
+use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 
-class MenuController extends Controller
+class FoodTruckController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($slug)
+    public function index()
     {
-        $foodTruck = FoodTruck::where('slug',$slug)->first();
-        return view('foodTruckMenus.index',compact('foodTruck','menus'));
+        $trucks = FoodTruck::all();
+        return view('foodTrucks.index',compact('trucks'));
     }
 
     /**
@@ -25,11 +26,9 @@ class MenuController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($slug)
+    public function create()
     {
-        $foodTruck = FoodTruck::where('slug',$slug)->first();
-        $menus = $foodTruck->menus;
-        return view('foodTruckMenus.create',compact('foodTruck','menus'));
+        //
     }
 
     /**
@@ -46,44 +45,51 @@ class MenuController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Menu  $menu
+     * @param  \App\FoodTruck  $foodTruck
      * @return \Illuminate\Http\Response
      */
-    public function show(Menu $menu)
+    public function show($slug)
     {
-        //
+        $truck = FoodTruck::where('slug',$slug)->first();
+        return view('foodTrucks.show',compact('truck'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Menu  $menu
+     * @param  \App\FoodTruck  $foodTruck
      * @return \Illuminate\Http\Response
      */
-    public function edit(Menu $menu)
+    public function edit($slug)
     {
-        //
+        $foodTruck = FoodTruck::where('slug',$slug)->first();
+        return view('foodTrucks.edit',compact('foodTruck'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Menu  $menu
+     * @param  \App\FoodTruck  $foodTruck
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Menu $menu)
+    public function update(Request $request, FoodTruck $foodTruck)
     {
-        //
+        $foodTruck->update(
+            $request->only([
+                'email','phone_number','name'
+            ])
+        );
+        return response()->json($foodTruck);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Menu  $menu
+     * @param  \App\FoodTruck  $foodTruck
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Menu $menu)
+    public function destroy(FoodTruck $foodTruck)
     {
         //
     }

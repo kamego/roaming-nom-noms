@@ -1,23 +1,25 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
 use App\FoodTruck;
 use App\Menu;
+use App\MenuItem;
+
+use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 
-class MenuController extends Controller
+class MenuItemController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($slug)
+    public function index()
     {
-        $foodTruck = FoodTruck::where('slug',$slug)->first();
-        return view('foodTruckMenus.index',compact('foodTruck','menus'));
+        //
     }
 
     /**
@@ -25,11 +27,9 @@ class MenuController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($slug)
+    public function create()
     {
-        $foodTruck = FoodTruck::where('slug',$slug)->first();
-        $menus = $foodTruck->menus;
-        return view('foodTruckMenus.create',compact('foodTruck','menus'));
+        //
     }
 
     /**
@@ -38,9 +38,18 @@ class MenuController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Menu $menu)
     {
-        //
+        $item = MenuItem::create(
+            array_merge(
+                $request->only([
+                    'name',
+                    'price'
+                ]), 
+                [ 'menu_id' => $menu->id ]
+            )
+        );
+        return response()->json($item);
     }
 
     /**
@@ -49,9 +58,9 @@ class MenuController extends Controller
      * @param  \App\Menu  $menu
      * @return \Illuminate\Http\Response
      */
-    public function show(Menu $menu)
+    public function show(MenuItem $item)
     {
-        //
+        return response()->json($item);
     }
 
     /**
@@ -83,8 +92,9 @@ class MenuController extends Controller
      * @param  \App\Menu  $menu
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Menu $menu)
+    public function destroy(MenuItem $item)
     {
-        //
+        $item->delete();
+        return response()->json(['message'=>'Item was successfully deleted.']);
     }
 }

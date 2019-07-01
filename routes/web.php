@@ -24,8 +24,10 @@ Route::get('admin/routes', 'HomeController@admin')->middleware('admin');
 Route::group(['prefix'=>'food-trucks'], function(){
 	Route::get('{slug}','FoodTruckController@show');
 	Route::get('{slug}/edit','FoodTruckController@edit');
+	Route::post('{slug}/update','FoodTruckController@update');
 	
 	Route::group(['prefix'=>'{slug}'], function(){
+		Route::get('menus/create','MenuController@create');
 		Route::resource('menus','MenuController');
 	});
 

@@ -16,9 +16,9 @@ class CreateMenusTable extends Migration
         Schema::create('menus', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('user_id')->unsigned()->nullable();
-            $table->foreign('user_id')->references('id')->on('users');
+            // $table->foreign('user_id')->references('id')->on('users');
             $table->integer('food_truck_id')->unsigned()->nullable();
-            $table->foreign('food_truck_id')->references('id')->on('food_trucks');
+            // $table->foreign('food_truck_id')->references('id')->on('food_trucks');
             $table->string('title')->nullable();
             $table->boolean('display_prices')->default(0);
             $table->integer('order')->unsigned()->default(0);

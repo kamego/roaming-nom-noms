@@ -16,12 +16,14 @@ class CreateMenuItemsTable extends Migration
         Schema::create('menu_items', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('menu_id')->unsigned()->nullable();
-            $table->foreign('menu_id')->references('id')->on('menus');
+            // $table->foreign('menu_id')->references('id')->on('menus');
             $table->integer('user_id')->unsigned()->nullable();
-            $table->foreign('user_id')->references('id')->on('users');
+            // $table->foreign('user_id')->references('id')->on('users');
             $table->string('name');
             $table->string('description')->nullable();
             $table->boolean('is_signature')->default(0);
+            $table->boolean('is_bulk_item')->default(0);
+            $table->integer('bulk_quantity')->unsigned()->nullable();
             $table->decimal('price',5,2)->default(0.00);
             $table->boolean('display_price')->default(0);
             $table->integer('order')->unsigned()->default(0);

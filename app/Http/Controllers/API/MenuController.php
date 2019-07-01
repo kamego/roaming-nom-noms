@@ -1,9 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
 use App\FoodTruck;
 use App\Menu;
+
+use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 
@@ -14,10 +16,9 @@ class MenuController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($slug)
+    public function index()
     {
-        $foodTruck = FoodTruck::where('slug',$slug)->first();
-        return view('foodTruckMenus.index',compact('foodTruck','menus'));
+        //
     }
 
     /**
@@ -25,11 +26,9 @@ class MenuController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($slug)
+    public function create()
     {
-        $foodTruck = FoodTruck::where('slug',$slug)->first();
-        $menus = $foodTruck->menus;
-        return view('foodTruckMenus.create',compact('foodTruck','menus'));
+        //
     }
 
     /**
@@ -38,9 +37,17 @@ class MenuController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, FoodTruck $foodTruck)
     {
-        //
+        $menu = Menu::create(
+            array_merge(
+                $request->only([
+                    'title'
+                ]), 
+                [ 'food_truck_id' => $foodTruck->id ]
+            )
+        );
+        return response()->json($menu);
     }
 
     /**
@@ -51,7 +58,8 @@ class MenuController extends Controller
      */
     public function show(Menu $menu)
     {
-        //
+        $menu = $menu->load('items');
+        return response()->json($menu);
     }
 
     /**
@@ -85,6 +93,7 @@ class MenuController extends Controller
      */
     public function destroy(Menu $menu)
     {
-        //
+        $menu->delete();
+        return response()->json(['message'=>'Menu was successfully deleted.']);
     }
 }

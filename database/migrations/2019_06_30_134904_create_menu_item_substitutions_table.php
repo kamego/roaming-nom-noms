@@ -16,9 +16,9 @@ class CreateMenuItemSubstitutionsTable extends Migration
         Schema::create('menu_item_substitutions', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('menu_item_id')->unsigned()->nullable();
-            $table->foreign('menu_item_id')->references('id')->on('menu_items');
+            // $table->foreign('menu_item_id')->references('id')->on('menu_items');
             $table->integer('user_id')->unsigned()->nullable();
-            $table->foreign('user_id')->references('id')->on('users');
+            // $table->foreign('user_id')->references('id')->on('users');
             $table->string('name');
             $table->decimal('price',5,2)->default(0.00);
             $table->integer('order')->unsigned()->default(0);
